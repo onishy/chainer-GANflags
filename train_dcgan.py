@@ -16,7 +16,7 @@ from visualize import out_generated_image
 
 def main():
     parser = argparse.ArgumentParser(description='Chainer example: DCGAN')
-    parser.add_argument('--batchsize', '-b', type=int, default=50,
+    parser.add_argument('--batchsize', '-b', type=int, default=5,
                         help='Number of images in each mini-batch')
     parser.add_argument('--epoch', '-e', type=int, default=1000,
                         help='Number of sweeps over the dataset to train')
