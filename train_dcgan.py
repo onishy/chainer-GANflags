@@ -13,6 +13,8 @@ from net import Generator
 from updater import DCGANUpdater
 from visualize import out_generated_image
 
+from dataset import PreloadedImageDataset
+
 
 def main():
     parser = argparse.ArgumentParser(description='Chainer example: DCGAN')
@@ -71,8 +73,7 @@ def main():
         image_files = [f for f in all_files if ('png' in f or 'jpg' in f)]
         print('{} contains {} image files'
               .format(args.dataset, len(image_files)))
-        train = chainer.datasets\
-            .ImageDataset(paths=image_files, root=args.dataset)
+        train = PreloadedImageDataset(paths=image_files, root=args.dataset)
 
     train_iter = chainer.iterators.SerialIterator(train, args.batchsize)
 
