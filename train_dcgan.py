@@ -36,6 +36,8 @@ def main():
                         help='Interval of snapshot')
     parser.add_argument('--display_interval', type=int, default=100,
                         help='Interval of displaying log to console')
+    parser.add_argument('--preview_interval', type=int, default=200,
+                        help='Interval of generating preview')
     args = parser.parse_args()
 
     print('GPU: {}'.format(args.gpu))
@@ -87,6 +89,7 @@ def main():
 
     snapshot_interval = (args.snapshot_interval, 'iteration')
     display_interval = (args.display_interval, 'iteration')
+    preview_interval = (args.preview_interval, 'iteration')
     trainer.extend(
         extensions.snapshot(filename='snapshot_iter_{.updater.iteration}.npz'),
         trigger=snapshot_interval)
@@ -103,7 +106,7 @@ def main():
         out_generated_image(
             gen, dis,
             10, 10, args.seed, args.out),
-        trigger=snapshot_interval)
+        trigger=preview_interval)
 
     if args.resume:
         # Resume from a snapshot
